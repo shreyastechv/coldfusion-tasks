@@ -14,7 +14,15 @@
 				<cfoutput>
 					<cfset obj = createObject('component', 'comp')>
 					<cfset result = obj.printDate()>
-					#result#
+					<p>Todays Date: #result.todaysDate#</p>
+					<p>Current Month in numeric: #result.currMonthInNum#</p>
+					<p>Current Month in word: #result.currMonthInWord#</p>
+					<p>Last Friday date: #result.lastFriday#</p>
+					<p>Last day of month: #result.lastDayOfMonth#</p>
+					<p>Last five days:</p>
+					<cfloop array="#result.prevDays#" item="prevDay">
+						<p class="#result.weekClasses[DayOfWeek(prevDay)]#">#DateFormat(prevDay, "dd-mmm-yyyy - dddd")#</p>
+					</cfloop>
 				</cfoutput>
 			</div>
 		</div>

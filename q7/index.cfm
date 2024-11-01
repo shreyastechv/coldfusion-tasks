@@ -21,8 +21,21 @@
 				<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
 					<cfset obj = createObject('component', 'comp')>
 					<cfset result = obj.checkNum(Form.text1, Form.text2)>
-					<cfset StructAppend(Session.results, result)>
+					<cfif StructKeyExists(Session.results, Form.text1)>
+						<cfif NOT ArrayContains(Session.results[Form.text1], Form.text2)>
+							<cfset ArrayAppend(Session.results[Form.text1], Form.text2)>
+						</cfif>
+					<cfelse>
+						<cfset StructAppend(Session.results, result)>
+					</cfif>
 					<cfdump var = #Session.results#>
+					<cfloop collection=#Session.results# item="key">
+						<cfloop array=#Session.results[key]# item="value">
+							#key#: #value#
+							<br>
+						</cfloop>
+						<br>
+					</cfloop>
 				</cfif>
 				<cfset StructDelete(Form, "text1")>
 				<cfset StructDelete(Form, "text2")>

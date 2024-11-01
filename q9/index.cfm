@@ -20,7 +20,7 @@
 			<div class="text-primary-emphasis text-center mt-3">
 				<cfoutput>
 					<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
-						<cfif StructKeyExists(Session.results, "Form.text1")>
+						<cfif StructKeyExists(Session.results, Form.text1)>
 							[#Form.text1#] already present. Cannot add again.
 						<cfelse>
 							<cfset obj = createObject('component', 'comp')>

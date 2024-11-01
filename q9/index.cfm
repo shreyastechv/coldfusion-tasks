@@ -20,17 +20,17 @@
 			<div class="text-primary-emphasis text-center mt-3">
 				<cfoutput>
 					<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
-						<cfset text1 = #Form.text1#>
-						<cfset text2 = #Form.text2#>
-						<cfif StructKeyExists(Session.results, "#Form.text1#")>
+						<cfif StructKeyExists(Session.results, "Form.text1")>
 							[#Form.text1#] already present. Cannot add again.
 						<cfelse>
 							<cfset obj = createObject('component', 'comp')>
-							<cfset result = obj.checkNum(text1, text2)>
+							<cfset result = obj.checkNum(Form.text1, Form.text2)>
 							<cfset StructAppend(Session.results, result)>
 						</cfif>
-							<cfdump var = #Session.results#>
+						<cfdump var = #Session.results#>
 					</cfif>
+					<cfset StructDelete(Form, "text1")>
+					<cfset StructDelete(Form, "text2")>
 				</cfoutput>
 			</div>
 		</div>

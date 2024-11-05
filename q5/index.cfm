@@ -10,13 +10,13 @@
 
     <body>
 		<div class="container mt-5">
-			<cfform class="d-flex flex-column gap-2" name="testform" method="post">
+			<form class="d-flex flex-column gap-2" name="testform" method="post">
 				<label for="dob">Please enter your DOB:</label>
 				<input class="w-100 rounded-3 p-2" type="date" name="dob" id="dob" required>
 				<label for="dobMom">Please enter your mother's DOB:</label>
 				<input class="w-100 rounded-3 p-2" type="date" name="dobMom" id="dobMom" required>
 				<input class="btn bg-success" type="submit" name="submitBtn">
-			</cfform>
+			</form>
 
 			<div class="text-primary-emphasis mt-3">
 				<cfoutput>

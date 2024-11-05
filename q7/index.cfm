@@ -19,12 +19,26 @@
 
 			<div class="text-primary-emphasis text-center mt-3">
 				<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
-					<cfset text1 = #Form.text1#>
-					<cfset text2 = #Form.text2#>
 					<cfset obj = createObject('component', 'comp')>
-					<cfset result = obj.checkNum(text1, text2)>
-					<cfdump var = #result#>
+					<cfset result = obj.checkNum(Form.text1, Form.text2)>
+					<cfif StructKeyExists(Session.results, Form.text1)>
+						<cfif NOT ArrayContains(Session.results[Form.text1], Form.text2)>
+							<cfset ArrayAppend(Session.results[Form.text1], Form.text2)>
+						</cfif>
+					<cfelse>
+						<cfset StructAppend(Session.results, result)>
+					</cfif>
+					<cfdump var = #Session.results#>
+					<cfloop collection=#Session.results# item="key">
+						<cfloop array=#Session.results[key]# item="value">
+							#key#: #value#
+							<br>
+						</cfloop>
+						<br>
+					</cfloop>
 				</cfif>
+				<cfset StructDelete(Form, "text1")>
+				<cfset StructDelete(Form, "text2")>
 			</div>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

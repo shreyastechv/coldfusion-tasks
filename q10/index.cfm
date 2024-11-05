@@ -17,14 +17,21 @@
 				<input class="btn bg-success" type="submit" name="submitBtn">
 			</form>
 
-			<div class="text-primary-emphasis text-center mt-3">
-				<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
-					<cfset text1 = #Form.text1#>
-					<cfset text2 = #Form.text2#>
-					<cfset obj = createObject('component', 'comp')>
-					<cfset result = obj.checkNum(text1, text2)>
-					<cfdump var = #result#>
-				</cfif>
+			<div class="text-primary-emphasis mt-3">
+				<cfoutput>
+					<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
+						<cfset obj = createObject('component', 'comp')>
+						<cfset result = obj.checkNum(Form.text1, Form.text2)>
+						<cfset StructAppend(Session.results, result)>
+						<cfset sortedKeys = StructSort(Session.results)>
+						<cfloop array=#sortedKeys# index="key">
+							#key#:#Session.results[key]#
+							<br>
+						</cfloop>
+					</cfif>
+					<cfset StructDelete(Form, "text1")>
+					<cfset StructDelete(Form, "text2")>
+				</cfoutput>
 			</div>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

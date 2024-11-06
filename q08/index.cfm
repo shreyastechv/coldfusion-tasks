@@ -9,34 +9,21 @@
 
     <body>
 		<div class="container mt-5">
-
 			<form class="d-flex flex-column gap-2" name="testform" method="post">
-				<label for="queryNum">Please enter a number between 1-10 :</label>
-				<input class="w-100 rounded-3 p-2" type="number" name="queryNum" id="queryNum" min="1" max="10" placeholder="Enter a number" required>
+				<label for="text1">Please enter first text:</label>
+				<input class="w-100 rounded-3 p-2" type="text" name="text1" id="text1" placeholder="Enter 1st text" required>
+				<label for="text2">Please enter second text:</label>
+				<input class="w-100 rounded-3 p-2" type="text" name="text2" id="text2" placeholder="Enter 2nd text" required>
 				<input class="btn bg-success" type="submit" name="submit">
 			</form>
 
-			<div class="text-primary-emphasis mt-3">
-				<cfset local.obj = createObject('component', 'comp')>
-				<cfif IsDefined("Form.queryNum")>
-					<cfset local.result = local.obj.testQuery(Form.queryNum)>
-				<cfelse>
-					<cfset local.result = local.obj.testQuery()>
+			<div class="text-primary-emphasis text-center mt-3">
+				<cfif IsDefined("form.submit")>
+					<cfset local.obj = createObject('component', 'comp')>
+					<cfset local.result = local.obj.makeStruct(form.text1, form.text2)>
+					<cfset StructAppend(session.results, local.result)>
+					<cfdump var = #session.results#>
 				</cfif>
-
-				Fullnames of people: <br>
-				<cfoutput query="local.result.qOut">
-					#local.result.qOut.firstname#
-					#local.result.qOut.lastname#
-					<br>
-				</cfoutput>
-
-				<cfoutput>
-					<cfif IsDefined("Form.submit")>
-						<br>
-						#Form.queryNum# th row first name is #local.result.nthName#
-					</cfif>
-				</cfoutput>
 			</div>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

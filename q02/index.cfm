@@ -8,28 +8,22 @@
     </head>
 
     <body>
-		<cfoutput>
-			<div class="container mt-5">
-				<div class="text-primary-emphasis mt-3">
-					<cffunction name="multiply" returnType="string" access="private">
-						<cfset product = 1>
-						<cfloop array="#arguments#" item="num">
-							<cfset product = product * num>
-						</cfloop>
-						<cfreturn product>
-					</cffunction>
+		<div class="container mt-5">
+			<form class="d-flex flex-column gap-2" name="testform" method="post">
+				<label for="num">Please enter a number:</label>
+				<input class="w-100 rounded-3 p-2" type="number" name="num" id="num" placeholder="Enter number from 1-5" min="1" max="5" required>
+				<input class="btn bg-success" type="submit" name="submit">
+			</form>
 
-					<cfset res = multiply(1,2)>
-					1x2 = #res#
-					<br>
-					<cfset res = multiply(1,2,3)>
-					1x2x3 = #res#
-					<br>
-					<cfset res = multiply(1,2,3,4)>
-					1x2x3x4 = #res#
-				</div>
+			<div class="text-primary-emphasis text-center mt-3">
+				<cfif IsDefined("form.submit")>
+					<cfset local.num = #form.num#>
+					<cfset local.obj = createObject('component', 'comp')>
+					<cfset local.result = local.obj.checkNum(local.num)>
+					<cfoutput>#local.result#</cfoutput>
+				</cfif>
 			</div>
-		</cfoutput>
+		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

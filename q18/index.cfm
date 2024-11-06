@@ -11,22 +11,9 @@
 		<cfoutput>
 			<div class="container mt-5">
 				<div class="text-primary-emphasis mt-3">
-					<cffunction name="multiply" returnType="string" access="private">
-						<cfset product = 1>
-						<cfloop array="#arguments#" item="num">
-							<cfset product = product * num>
-						</cfloop>
-						<cfreturn product>
-					</cffunction>
-
-					<cfset res = multiply(1,2)>
-					1x2 = #res#
-					<br>
-					<cfset res = multiply(1,2,3)>
-					1x2x3 = #res#
-					<br>
-					<cfset res = multiply(1,2,3,4)>
-					1x2x3x4 = #res#
+					<cfset local.objQuery = createObject('component', 'comp')>
+					<cfset local.testQuery = local.objQuery.makeQuery()>
+					<cfdump var = "#local.testQuery#">
 				</div>
 			</div>
 		</cfoutput>

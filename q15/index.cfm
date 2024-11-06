@@ -13,23 +13,23 @@
 				<cfoutput>
 
 					<!--- Using createObject function --->
-					<cfset obj1 = createObject('component', 'comp')>
-					<cfset product1 = obj1.multiply(1,2)>
-					Using createObject function: #product1#
+					<cfset local.obj1 = createObject('component', 'comp')>
+					<cfset local.product1 = local.obj1.multiply(1,2)>
+					Using createObject function: #local.product1#
 					<br>
 
 					<!--- Using cfobject tag --->
-					<cfobject name="obj2" component="comp">
-					<cfset product2 = obj2.multiply(1,2,3)>
-					Using cfobject tag: #product2#
+					<cfobject name="local.obj2" component="comp">
+					<cfset local.product2 = local.obj2.multiply(1,2,3)>
+					Using cfobject tag: #local.product2#
 					<br>
 
 					<!--- Using cfinvoke tag --->
-					<cfobject name="obj3" component="comp">
-					<cfset args = [1,2,3,4]>
-					<cfinvoke component="#obj3#" method="multiply" argumentCollection="#args#" returnVariable="product3">
+					<cfobject name="local.obj3" component="comp">
+					<cfset local.args = [1,2,3,4]>
+					<cfinvoke component="#local.obj3#" method="multiply" argumentCollection="#local.args#" returnVariable="local.product3">
 					</cfinvoke>
-					Using cfinvoke tag: #product3#
+					Using cfinvoke tag: #local.product3#
 				</cfoutput>
 			</div>
 		</div>

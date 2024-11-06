@@ -1,0 +1,33 @@
+p {
+    margin: 0;
+}
+
+.Sunday {
+    color: red;
+}
+
+.Monday {
+    color: green;
+}
+
+.Tuesday {
+    color: orange;
+}
+
+.Wednesday {
+    color: yellow;
+}
+
+.Thursday {
+    color: black;
+    font-weight: bold;
+}
+
+.Friday {
+    color: blue;
+}
+
+.Saturday {
+    color: red;
+    font-weight: bold;
+}

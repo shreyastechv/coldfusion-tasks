@@ -1,9 +1,13 @@
 <cfcomponent>
     <cffunction name="multiply" returnType="string" access="public">
-        <cfset sum = 1>
+        <cfif  ArrayLen(arguments) IS 0>
+            <cfset local.product = 0>
+        <cfelse>
+            <cfset local.product = 1>
+        </cfif>
         <cfloop array="#arguments#" item="item">
-            <cfset sum = sum * item>
+            <cfset local.product *= item>
         </cfloop>
-        <cfreturn sum>
+        <cfreturn local.product>
     </cffunction>
 </cfcomponent>

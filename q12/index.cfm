@@ -32,7 +32,7 @@
 				</cfoutput>
 
 				<cfoutput>
-					<cfif IsDefined("Form.query")>
+					<cfif IsDefined("Form.queryNum")>
 						<br>
 						#Form.queryNum# th row first name is #result.nthName#
 					</cfif>

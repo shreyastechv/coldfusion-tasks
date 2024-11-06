@@ -1,18 +1,22 @@
 <cfcomponent>
     <cffunction name="checkNum" returnType="string" access="public">
         <cfargument required="true" type="integer" name="num">
-        <cfif num IS 5>
-            <cfreturn "Very good">
-        <cfelseif num IS 4>
-            <cfreturn "Good">
-        <cfelseif num IS 3>
-            <cfreturn "Fair">
-        <cfelseif num IS 2>
-            <cfreturn "OK">
-        <cfelseif num IS 1>
-            <cfreturn "OK">
+        <cfset local.result = "">
+
+        <cfif arguments.num IS 5>
+            <cfset local.result = "Very good">
+        <cfelseif arguments.num IS 4>
+            <cfset local.result = "Good">
+        <cfelseif arguments.num IS 3>
+            <cfset local.result = "Fair">
+        <cfelseif arguments.num IS 2>
+            <cfset local.result = "OK">
+        <cfelseif arguments.num IS 1>
+            <cfset local.result = "OK">
         <cfelse>
-            <cfreturn "Invalid input">
+            <cfset local.result = "Invalid input">
         </cfif>
+
+        <cfreturn local.result>
     </cffunction>
 </cfcomponent>

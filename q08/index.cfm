@@ -14,17 +14,15 @@
 				<input class="w-100 rounded-3 p-2" type="text" name="text1" id="text1" placeholder="Enter 1st text" required>
 				<label for="text2">Please enter second text:</label>
 				<input class="w-100 rounded-3 p-2" type="text" name="text2" id="text2" placeholder="Enter 2nd text" required>
-				<input class="btn bg-success" type="submit" name="submitBtn">
+				<input class="btn bg-success" type="submit" name="submit">
 			</form>
 
 			<div class="text-primary-emphasis text-center mt-3">
-				<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
-					<cfset text1 = #Form.text1#>
-					<cfset text2 = #Form.text2#>
-					<cfset obj = createObject('component', 'comp')>
-					<cfset result = obj.checkNum(text1, text2)>
-					<cfset StructAppend(Session.results, result)>
-					<cfdump var = #Session.results#>
+				<cfif IsDefined("form.submit")>
+					<cfset local.obj = createObject('component', 'comp')>
+					<cfset local.result = local.obj.makeStruct(form.text1, form.text2)>
+					<cfset StructAppend(session.results, local.result)>
+					<cfdump var = #session.results#>
 				</cfif>
 			</div>
 		</div>

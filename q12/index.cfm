@@ -13,28 +13,28 @@
 			<form class="d-flex flex-column gap-2" name="testform" method="post">
 				<label for="queryNum">Please enter a number between 1-10 :</label>
 				<input class="w-100 rounded-3 p-2" type="number" name="queryNum" id="queryNum" min="1" max="10" placeholder="Enter a number" required>
-				<input class="btn bg-success" type="submit" name="submitBtn">
+				<input class="btn bg-success" type="submit" name="submit">
 			</form>
 
 			<div class="text-primary-emphasis mt-3">
-				<cfset obj = createObject('component', 'comp')>
+				<cfset local.obj = createObject('component', 'comp')>
 				<cfif IsDefined("Form.queryNum")>
-					<cfset result = obj.testQuery(Form.queryNum)>
+					<cfset local.result = local.obj.testQuery(Form.queryNum)>
 				<cfelse>
-					<cfset result = obj.testQuery()>
+					<cfset local.result = local.obj.testQuery()>
 				</cfif>
 
 				Fullnames of people: <br>
-				<cfoutput query="result.queryOutput">
-					#result.queryOutput.firstname#
-					#result.queryOutput.lastname#
+				<cfoutput query="local.result.qOut">
+					#local.result.qOut.firstname#
+					#local.result.qOut.lastname#
 					<br>
 				</cfoutput>
 
 				<cfoutput>
-					<cfif IsDefined("Form.queryNum")>
+					<cfif IsDefined("Form.submit")>
 						<br>
-						#Form.queryNum# th row first name is #result.nthName#
+						#Form.queryNum# th row first name is #local.result.nthName#
 					</cfif>
 				</cfoutput>
 			</div>

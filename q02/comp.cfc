@@ -1,22 +1,24 @@
 <cfcomponent>
     <cffunction name="checkNum" returnType="string" access="public">
         <cfargument required="true" type="integer" name="num">
-        <cfswitch expression="#num#">
+        <cfset local.result = "">
+        <cfswitch expression="#arguments.num#">
             <cfcase value="5">
-                <cfreturn "Very Good">
+                <cfset local.result = "Very Good">
             </cfcase>
             <cfcase value="4">
-                <cfreturn "Good">
+                <cfset local.result = "Good">
             </cfcase>
             <cfcase value="3">
-                <cfreturn "Fair">
+                <cfset local.result = "Fair">
             </cfcase>
             <cfcase value="2,1">
-                <cfreturn "OK">
+                <cfset local.result = "OK">
             </cfcase>
             <cfdefaultcase>
-                <cfreturn "Invalid Input">
+                <cfset local.result = "Invalid Input">
             </cfdefaultcase>
         </cfswitch>
+        <cfreturn local.result>
     </cffunction>
 </cfcomponent>

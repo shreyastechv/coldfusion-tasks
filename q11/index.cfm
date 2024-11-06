@@ -8,26 +8,28 @@
     </head>
 
     <body>
-		<div class="container mt-5">
-			<div class="text-primary-emphasis mt-3">
-				<cfoutput>
+		<cfoutput>
+			<div class="container mt-5">
+				<div class="text-primary-emphasis mt-3">
 					<cffunction name="multiply" returnType="string" access="private">
 						<cfset product = 1>
-						<cfloop array=#arguments# item="number">
-							<cfset product = product * number>
+						<cfloop array="#arguments#" item="num">
+							<cfset product = product * num>
 						</cfloop>
 						<cfreturn product>
 					</cffunction>
 
 					<cfset res = multiply(1,2)>
-					<cfdump var = #res#>
+					1x2 = #res#
+					<br>
 					<cfset res = multiply(1,2,3)>
-					<cfdump var = #res#>
+					1x2x3 = #res#
+					<br>
 					<cfset res = multiply(1,2,3,4)>
-					<cfdump var = #res#>
-				</cfoutput>
+					1x2x3x4 = #res#
+				</div>
 			</div>
-		</div>
+		</cfoutput>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

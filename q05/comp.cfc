@@ -2,27 +2,27 @@
     <cffunction name="DaysTillBday" returnType="string" access="private">
         <cfargument required="true" type="string" name="bday">
 
-        <cfset thisYearBday = bday.setYear(Year(Now()))>
-        <cfif DateCompare(thisYearBday, now()) EQ 1>
-            <cfset nextBday = thisYearBday>
+        <cfset local.thisYearBday = arguments.bday.setYear(Year(Now()))>
+        <cfif DateCompare(local.thisYearBday, now()) EQ 1>
+            <cfset local.nextBday = local.thisYearBday>
         <cfelse>
-            <cfset nextBday = bday.setYear(Year(Now())+1)>
+            <cfset local.nextBday = arguments.bday.setYear(Year(Now())+1)>
         </cfif>
-        <cfreturn DateDiff("d", Now(), nextBday)+1>
+        <cfreturn DateDiff("d", Now(), local.nextBday)+1>
     </cffunction>
 
     <cffunction name="checkDate" returnType="struct" access="public">
         <cfargument required="true" type="string" name="dob">
         <cfargument required="true" type="string" name="dobMom">
 
-        <cfif DateCompare(dobMom, dob)>
-            <cfset newStruct = structNew()>
-            <cfset newStruct["age"] = DateDiff("yyyy", dob, Now())>
-            <cfset ageMom = DateDiff("yyyy", dobMom, Now())>
-            <cfset newStruct["momsAgeWhileDelivery"] = ageMom - newStruct["age"]>
-            <cfset newStruct["daysTillBday"] = DaysTillBday(dob)>
-            <cfset newStruct["daysTillBdayMom"] = DaysTillBday(dobMom)>
-            <cfreturn newStruct>
+        <cfif DateCompare(arguments.dobMom, arguments.dob)>
+            <cfset local.newStruct = structNew()>
+            <cfset local.newStruct["age"] = DateDiff("yyyy", arguments.dob, Now())>
+            <cfset local.ageMom = DateDiff("yyyy", arguments.dobMom, Now())>
+            <cfset local.newStruct["momsAgeWhileDelivery"] = local.ageMom - local.newStruct["age"]>
+            <cfset local.newStruct["daysTillBday"] = DaysTillBday(arguments.dob)>
+            <cfset local.newStruct["daysTillBdayMom"] = DaysTillBday(arguments.dobMom)>
+            <cfreturn local.newStruct>
         </cfif>
     </cffunction>
 </cfcomponent>

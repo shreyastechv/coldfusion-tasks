@@ -2,32 +2,32 @@ p {
     margin: 0;
 }
 
-.sun {
+.Sunday {
     color: red;
 }
 
-.mon {
+.Monday {
     color: green;
 }
 
-.tue {
+.Tuesday {
     color: orange;
 }
 
-.wed {
+.Wednesday {
     color: yellow;
 }
 
-.thu {
+.Thursday {
     color: black;
     font-weight: bold;
 }
 
-.fri {
+.Friday {
     color: blue;
 }
 
-.sat {
+.Saturday {
     color: red;
     font-weight: bold;
 }

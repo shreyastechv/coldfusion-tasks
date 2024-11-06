@@ -14,31 +14,21 @@
 				<input class="w-100 rounded-3 p-2" type="text" name="text1" id="text1" placeholder="Enter 1st text" required>
 				<label for="text2">Please enter second text:</label>
 				<input class="w-100 rounded-3 p-2" type="text" name="text2" id="text2" placeholder="Enter 2nd text" required>
-				<input class="btn bg-success" type="submit" name="submitBtn">
+				<input class="btn bg-success" type="submit" name="submit">
 			</form>
 
 			<div class="text-primary-emphasis text-center mt-3">
-				<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
-					<cfset obj = createObject('component', 'comp')>
-					<cfset result = obj.checkNum(Form.text1, Form.text2)>
-					<cfif StructKeyExists(Session.results, Form.text1)>
-						<cfif NOT ArrayContains(Session.results[Form.text1], Form.text2)>
-							<cfset ArrayAppend(Session.results[Form.text1], Form.text2)>
-						</cfif>
-					<cfelse>
-						<cfset StructAppend(Session.results, result)>
-					</cfif>
-					<cfdump var = #Session.results#>
-					<cfloop collection=#Session.results# item="key">
-						<cfloop array=#Session.results[key]# item="value">
-							#key#: #value#
-							<br>
-						</cfloop>
-						<br>
-					</cfloop>
+				<cfif NOT StructKeyExists(session,"structResult")>
+					<cfset session.structResult = structNew()>
 				</cfif>
-				<cfset StructDelete(Form, "text1")>
-				<cfset StructDelete(Form, "text2")>
+				<cfif IsDefined("form.submit")>
+					<cfset obj = createObject('component', 'comp')>
+					<cfset result = obj.makeStruct(form.text1, form.text2)>
+					<cfset StructAppend(session.structResult, result)>
+					<cfdump var="#session.structResult#">
+				</cfif>
+				<cfset StructClear(Form)>
+
 			</div>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

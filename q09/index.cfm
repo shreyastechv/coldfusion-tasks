@@ -14,23 +14,22 @@
 				<input class="w-100 rounded-3 p-2" type="text" name="text1" id="text1" placeholder="Enter 1st text" required>
 				<label for="text2">Please enter second text:</label>
 				<input class="w-100 rounded-3 p-2" type="text" name="text2" id="text2" placeholder="Enter 2nd text" required>
-				<input class="btn bg-success" type="submit" name="submitBtn">
+				<input class="btn bg-success" type="submit" name="submit">
 			</form>
 
 			<div class="text-primary-emphasis text-center mt-3">
 				<cfoutput>
-					<cfif IsDefined("Form.text1") AND IsDefined("Form.text2")>
-						<cfif StructKeyExists(Session.results, Form.text1)>
-							[#Form.text1#] already present. Cannot add again.
+					<cfif IsDefined("form.submit")>
+						<cfif StructKeyExists(session.results, form.text1)>
+							[#form.text1#] already present. Cannot add again.
 						<cfelse>
-							<cfset obj = createObject('component', 'comp')>
-							<cfset result = obj.checkNum(Form.text1, Form.text2)>
-							<cfset StructAppend(Session.results, result)>
+							<cfset local.obj = createObject('component', 'comp')>
+							<cfset local.result = local.obj.makeStruct(form.text1, form.text2)>
+							<cfset StructAppend(session.results, local.result)>
 						</cfif>
-						<cfdump var = #Session.results#>
+						<cfdump var = #session.results#>
 					</cfif>
-					<cfset StructDelete(Form, "text1")>
-					<cfset StructDelete(Form, "text2")>
+					<cfset StructClear(Form)>
 				</cfoutput>
 			</div>
 		</div>

@@ -2,6 +2,6 @@
     <cfset This.sessionManagement="Yes">
 
     <cffunction name="onSessionStart" returnType="void">
-        <cfset Session.results = StructNew()>
+        <cfset session.results = StructNew()>
     </cffunction>
 </cfcomponent>

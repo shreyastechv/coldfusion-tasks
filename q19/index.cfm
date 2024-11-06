@@ -11,14 +11,16 @@
 		<div class="container mt-5">
 			<cfoutput>
 				<form class="d-flex flex-column gap-2" name="testform" method="post">
-					<input class="btn bg-success w-25" type="submit" name="submitBtn">
+					<input class="btn bg-success w-25" type="submit" name="submit">
 				</form>
 				<div class="text-primary-emphasis mt-3">
 					<cfif NOT StructKeyExists(Cookie, "VisitsCounter")>
-						<cfcookie name="VisitsCounter" value=1>
+						<cfcookie name="VisitsCounter" value=0>
 					</cfif>
 
-					<cfset Cookie.VisitsCounter += 1>
+					<cfif StructKeyExists(Form, "submit")>
+						<cfset Cookie.VisitsCounter += 1>
+					</cfif>
 					Visits Count: #Cookie.VisitsCounter#
 				</cfoutput>
 			</div>

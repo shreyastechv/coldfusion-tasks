@@ -8,22 +8,23 @@
     </head>
 
     <body>
-		<div class="container mt-5">
-			<form class="d-flex flex-column gap-2" name="testform" method="post">
-				<label for="numbers">Please enter numbers:</label>
-				<input class="w-100 rounded-3 p-2" type="text" name="numbers" id="numbers" placeholder="Enter numbers separated by commas" required>
-				<input class="btn bg-success" type="submit" name="submitBtn">
-			</form>
+		<cfoutput>
+			<div class="container mt-5">
+				<form class="d-flex flex-column gap-2" name="testform" method="post">
+					<label for="numbers">Please enter numbers:</label>
+					<input class="w-100 rounded-3 p-2" type="text" name="numbers" id="numbers" placeholder="Enter numbers separated by commas" required>
+					<input class="btn bg-success" type="submit" name="submit">
+				</form>
 
-			<div class="text-primary-emphasis text-center mt-3">
-				<cfif IsDefined("Form.numbers")>
-					<cfset numbers=#Form.numbers#>
-					<cfset obj = createObject('component', 'comp')>
-					<cfset result = obj.checkNum(numbers)>
-					<cfoutput>#result#</cfoutput>
-				</cfif>
+				<div class="text-primary-emphasis text-center mt-3">
+					<cfif IsDefined("form.submit")>
+						<cfset local.obj = createObject('component', 'comp')>
+						<cfset local.result = local.obj.checkNum(form.numbers)>
+						#local.result#
+					</cfif>
+				</div>
 			</div>
-		</div>
+		</cfoutput>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

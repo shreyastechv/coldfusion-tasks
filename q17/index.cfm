@@ -20,7 +20,7 @@
 				<div class="text-primary-emphasis mt-3">
 					<cfif structKeyExists(form, "submit")>
 						<cfloop from="1" to="#form.userInput#" index="i">
-							<cfif i%2 == 0>
+							<cfif i%2 IS 0>
 								<cfset local.color = "green">
 							<cfelse>
 								<cfset local.color = "blue">

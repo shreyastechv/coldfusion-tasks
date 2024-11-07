@@ -7,9 +7,15 @@
             select password from q27_table where username=<cfqueryparam value="#arguments.username#" cfsqltype="cf_sql_varchar">;
         </cfquery>
 
-        <cfif getPassword.password IS arguments.password>
-            <cfset session.loggedIn = true>
-            <cflocation url="welcome.cfm" addToken="no">
+        <cfif getPassword.password IS "">
+            <cfreturn "nouser">
+        <cfelse>
+            <cfif getPassword.password IS arguments.password>
+                <cfset session.loggedIn = true>
+                <cfreturn "good">
+            <cfelse>
+                <cfreturn "badpass">
+            </cfif>
         </cfif>
     </cffunction>
 </cfcomponent>

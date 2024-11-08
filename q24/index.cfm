@@ -30,47 +30,55 @@
 		</cfoutput>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 		<script>
-			var subscribeForm = document.getElementById("subscribeForm");
+			const subscribeForm = document.getElementById("subscribeForm");
+			const userFirstNameInput = document.getElementById("userFirstName");
+			const userEmailInput = document.getElementById("userEmail");
+			const submitBtn = document.getElementById("submit");
+			const statusSection = document.getElementById("status");
+
 			subscribeForm.addEventListener('submit', function (event) { event.preventDefault(); });
 
 			function validateEmail() {
-				const userEmail = document.getElementById("userEmail").value;
-				if (userEmail == "") return;
+				if (userEmailInput.value == "") {
+					statusSection.style.color = "red";
+					statusSection.textContent = "INPUT IS EMPTY!";
+					return;
+				}
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 						if (this.responseText === "true") {
-							document.getElementById("submit").disabled = true;
-							document.getElementById("status").style.color = "red";
-							document.getElementById("status").textContent = "Email already exists in the database.";
+							submitBtn.disabled = true;
+							statusSection.style.color = "red";
+							statusSection.textContent = "Email already exists in the database.";
 						}
 						else {
-							document.getElementById("submit").disabled = false;
-							document.getElementById("status").style.color = "cyan";
-							document.getElementById("status").textContent = "Email not subscribed. Click the button to join mailing list.";
+							submitBtn.disabled = false;
+							statusSection.style.color = "cyan";
+							statusSection.textContent = "Email not subscribed. Click the button to join mailing list.";
 						}
 					}
 				};
-				xhttp.open("GET", "comp.cfc?method=isEmailPresent&userEmail="+userEmail, true);
+				xhttp.open("GET", "comp.cfc?method=isEmailPresent&userEmail="+userEmailInput.value, true);
 				xhttp.send();
 			}
 
 			function subscribe() {
-				const userEmail = document.getElementById("userEmail").value;
-				const userFirstName = document.getElementById("userFirstName").value;
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("submit").disabled = true;
-						document.getElementById("status").style.color = "green";
-						document.getElementById("status").textContent = "Email subscribed.";
+						submitBtn.disabled = true;
+						statusSection.style.color = "green";
+						statusSection.textContent = "Email subscribed.";
+						userEmailInput.value = "";
+						userFirstNameInput.value = "";
 					}
 					else {
-						document.getElementById("status").style.color = "red";
-						document.getElementById("status").textContent = "Unable to subscribe.";
+						statusSection.style.color = "red";
+						statusSection.textContent = "Unable to subscribe.";
 					}
 				};
-				xhttp.open("GET", "comp.cfc?method=addUserData&userEmail="+userEmail+"&userFirstName="+userFirstName, true);
+				xhttp.open("GET", "comp.cfc?method=addUserData&userEmail="+userEmailInput.value+"&userFirstName="+userFirstNameInput.value, true);
 				xhttp.send();
 			}
 		</script>

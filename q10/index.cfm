@@ -23,11 +23,7 @@
 							<cfset local.obj = createObject('component', 'comp')>
 							<cfset local.result = local.obj.makeStruct(form.text1, form.text2)>
 							<cfset StructAppend(session.results, local.result)>
-							<cfset local.sortedKeys = StructSort(session.results)>
-							<cfloop array="#local.sortedKeys#" index="key">
-								#key#: #session.results[key]#
-								<br>
-							</cfloop>
+							<cfdump var = "#session.results#">
 						</cfif>
 						<cfset StructClear(Form)>
 				</div>

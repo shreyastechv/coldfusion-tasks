@@ -1,4 +1,4 @@
 <cfcomponent>
-    <cfset this.name = "SimpleLoginApp">
+    <cfset this.name = "SubscribePage">
     <cfset this.sessionManagement = "true">
 </cfcomponent>

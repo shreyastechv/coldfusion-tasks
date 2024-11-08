@@ -11,7 +11,6 @@
 		<cfoutput>
 			<div class="container mt-5">
 				<cfif StructKeyExists(session, "loggedIn")>
-					#session.loggedIn#
 					<cflocation url="welcome.cfm" addToken="no">
 				</cfif>
 

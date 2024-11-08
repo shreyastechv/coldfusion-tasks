@@ -21,6 +21,8 @@
 				</form>
 
 				<div class="text-primary-emphasis mt-3">
+					<cfif StructKeyExists(form, "submit")>
+					</cfif>
 					<div id="message"></div>
 				</div>
 			</div>
@@ -32,23 +34,19 @@
 			const messageSection = document.getElementById("message");
 
 			imageUploadForm.addEventListener('submit', function(event) {
-				event.preventDefault();
-
 				const filetypeArray = ['image/jpeg', 'image/png', 'image/gif'];
 				const imageSizeInMB = imageFileInput.files[0].size / 1048576;
 
 				if(!filetypeArray.includes(imageFileInput.files[0].type)) {
 					messageSection.textContent = "Wrong image type detected! Use either a png, jpg, jpeg, or gif file.";
-					return;
+					event.preventDefault();
 				}
 				else if (imageSizeInMB >= 1) {
 					messageSection.textContent = "File size should be less than 1MB.";
-					return;
+					event.preventDefault();
 				} else {
 					messageSection.textContent = "";
 				}
-
-				console.log(imageFileInput.files[0]);
 			});
 		</script>
 	</body>

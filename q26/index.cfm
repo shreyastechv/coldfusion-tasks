@@ -11,24 +11,15 @@
     <body>
 		<cfoutput>
 			<div class="container mt-5">
-				<form id="paraForm" name="paraForm" method="post">
-					<div class="form-group">
-						<label for="paraInput" class="form-label">Enter a paragraph: </label>
-						<textarea class="form-control" id="paraInput" name="paraInput" rows="4" required></textarea>
-						<button type="submit" id="submit" name="submit" class="btn btn-primary mt-3">Submit</button>
-					</div>
-				</form>
-
 				<div class="text-primary-emphasis mt-3">
-					<cfif StructKeyExists(form, "submit")>
-						<cfset objCountWords = CreateObject('component', 'components.tagCloud')>
-						<cfset local.structWordCount = objCountWords.countWords(form.paraInput)>
-						<cfdump var = "#local.structWordCount#">
+					<cffile action="read" file="#expandPath("./words.txt")#" variable="local.myFile">
+					<cfset objCountWords = CreateObject('component', 'components.tagCloud')>
+					<cfset local.structWordCount = objCountWords.countWords(local.myFile)>
+					<cfdump var = "#local.structWordCount#">
 
-						<cfloop collection="#local.structWordCount#" item="word">
-							<p style="font-size: #local.structWordCount[word]#em;">#word#</p>
-						</cfloop>
-					</cfif>
+					<cfloop collection="#local.structWordCount#" item="word">
+						<p style="font-size: #local.structWordCount[word]#em;">#word#</p>
+					</cfloop>
 				</div>
 			</div>
 		</cfoutput>

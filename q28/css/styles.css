@@ -1,0 +1,19 @@
+.addPageBtn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 3;
+}
+
+.overlayForm {
+    position: fixed;
+    display: none;
+    padding: 10%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 2;
+    cursor: pointer;
+}

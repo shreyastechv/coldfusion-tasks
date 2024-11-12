@@ -37,6 +37,9 @@
 			const statusSection = document.getElementById("status");
 
 			subscribeForm.addEventListener('submit', function (event) { event.preventDefault(); });
+			userEmailInput.addEventListener('change', function () {
+				submitBtn.disabled = true;
+			});
 
 			function validateEmail() {
 				if (userEmailInput.value == "") {

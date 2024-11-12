@@ -27,14 +27,14 @@
 									<li class="mb-2">
 										<div class="d-flex align-items-center gap-2">
 											<button type="button" class="btn btn-info" data-bs-toggle="collapse" data-bs-target="###pageid#">#pagename#</button>
-											<button class="btn" type="button" onclick="editPage('#pageid#')"><i class="fa-solid fa-pen-to-square text-white"></i></button>
+											<button class="btn" type="button" onclick="editPage('#pageid#', '#pagename#', '#pagedescs#')"><i class="fa-solid fa-pen-to-square text-white"></i></button>
 											<button class="btn" type="button" onclick="deletePage('#pageid#', '#pagename#')"><i class="fa-solid fa-trash text-danger"></i></button>
 										</div>
 										<div id="#pageid#" class="collapse">#pagedescs#</div>
 									</li>
 								</cfloop>
 							</ul>
-							<button id="addPageBtn" type="button" class="btn btn-light addPageBtn" onclick="OverlayToggle()"><i class="fa-solid fa-plus"></i></button>
+							<button id="addPageBtn" type="button" class="btn btn-light addPageBtn" onclick="addPage()"><i class="fa-solid fa-plus"></i></button>
 						<cfelse>
 							<cflocation url="index.cfm" addToken="no">
 						</cfif>
@@ -46,6 +46,7 @@
 							<input class="form-control mb-3" type="text" id="pageNameInput" name="pageNameInput" required>
 							<label class="form-label text-white" for="pageDescInput">Enter page description:</label>
 							<textarea class="form-control mb-3" id="pageDescInput" name="pageDescInput" maxlength="500" rows="7" required></textarea>
+							<input type="hidden" id="pageIdInput" name="pageIdInput" value="">
 							<input class="btn btn-primary" type="submit" id="submit" name="submit">
 						</form>
 					</div>
@@ -54,10 +55,6 @@
 		</cfoutput>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 		<script>
-			const overlayForm = document.getElementById("overlayForm");
-			const addPageForm = document.getElementById("addPageForm");
-			const addPageBtn = document.getElementById("addPageBtn");
-
 			function deletePage(pageid, pagename) {
 				if (confirm(`Delete the page '${pagename}'?`)) {
 					$.ajax({
@@ -76,6 +73,9 @@
 			}
 
 			function OverlayToggle() {
+				const overlayForm = document.getElementById("overlayForm");
+				const addPageBtn = document.getElementById("addPageBtn");
+
 				if (overlayForm.style.display == "block") {
 					overlayForm.style.display = "none";
 					addPageBtn.style.backgroundColor = "white";
@@ -88,26 +88,43 @@
 				}
 			}
 
-			function formSubmit(event) {
+			document.getElementById("addPageForm").addEventListener('submit', function (event) {
 				const pageName = document.getElementById("pageNameInput").value;
 				const pageDesc = document.getElementById("pageDescInput").value;
+				const pageId = document.getElementById("pageIdInput").value;
+				let ajaxData = {pageName: pageName, pageDesc: pageDesc};
+				let url = "";
+				if (pageId != "") {
+					ajaxData.pageId = parseInt(pageId);
+					ajaxUrl = "modifyPage.cfc?method=editPage";
+				}
+				else {
+					ajaxUrl = "modifyPage.cfc?method=addPage";
+				}
 				event.preventDefault();
 				$.ajax({
-						type: "POST",
-						url: "modifyPage.cfc?method=addPage",
-						dataType: "json",
-						data: {pageName: pageName, pageDesc: pageDesc},
-						success: function(result){
-							location.reload(result);
-						}
-					});
+					type: "POST",
+					url: ajaxUrl,
+					dataType: "json",
+					data: ajaxData,
+					success: function(result){
+						location.reload(result);
+					}
+				});
+			});
+
+			function addPage() {
+				document.getElementById("pageIdInput").value = "";
+				document.getElementById("pageNameInput").value = "";
+				document.getElementById("pageDescInput").value = "";
+				OverlayToggle();
 			}
 
-			addPageForm.addEventListener('submit', formSubmit);
-
-			function editPage(pageid) {
+			function editPage(pageid, pagename, pagedescs) {
+				document.getElementById("pageIdInput").value = pageid;
+				document.getElementById("pageNameInput").value = pagename;
+				document.getElementById("pageDescInput").value = pagedescs;
 				OverlayToggle();
-
 			}
 		</script>
 	</body>

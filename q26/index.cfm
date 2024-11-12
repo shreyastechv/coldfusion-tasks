@@ -13,8 +13,8 @@
 			<div class="container mt-5">
 				<div class="text-primary-emphasis mt-3">
 					<cffile action="read" file="#expandPath("./words.txt")#" variable="local.myFile">
-					<cfset objCountWords = CreateObject('component', 'components.tagCloud')>
-					<cfset local.structWordCount = objCountWords.countWords(local.myFile)>
+					<cfset local.objCountWords = CreateObject('component', 'components.tagCloud')>
+					<cfset local.structWordCount = local.objCountWords.countWords(local.myFile)>
 					<cfdump var = "#local.structWordCount#">
 
 					<cfloop collection="#local.structWordCount#" item="word">

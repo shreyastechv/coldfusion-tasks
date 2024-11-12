@@ -19,13 +19,13 @@
 				</form>
 
 				<div class="text-primary-emphasis mt-3">
-						<cfif IsDefined("form.submit")>
+						<cfif StructKeyExists(form, "submit")>
 							<cfset local.obj = createObject('component', 'comp')>
-							<cfset local.result = local.obj.makeStruct(form.text1, form.text2)>
-							<cfset StructAppend(session.results, local.result)>
-							<cfdump var = "#session.results#">
+							<cfset local.resultStruct = local.obj.makeStruct(form.text1, form.text2)>
+							<cfdump var = "#local.resultStruct#">
+
 						</cfif>
-						<cfset StructClear(Form)>
+						<cfset StructClear(form)>
 				</div>
 			</div>
 		</cfoutput>

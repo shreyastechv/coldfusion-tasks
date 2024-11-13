@@ -27,21 +27,8 @@
 				<div class="text-primary-emphasis mt-3">
 					<cfif StructKeyExists(form, "submit")>
 						<cfset local.objUserValidation = CreateObject('component', 'components.comp')>
-						<cfset local.result = local.objUserValidation.validateUser(form.username, form.password)>
-						<cfswitch expression="#local.result#">
-							<cfcase value="nouser">
-								There is no user with username #form.username#.
-							</cfcase>
-							<cfcase value="badpass">
-								Wrong password for the user with username #form.username#.
-							</cfcase>
-							<cfcase value="good">
-								<cflocation url="welcome.cfm" addToken="no">
-							</cfcase>
-							<cfdefaultcase>
-								Unknown Error
-							</cfdefaultcase>
-						</cfswitch>
+						<cfset local.message = local.objUserValidation.validateUser(form.username, form.password)>
+						#local.message#
 					</cfif>
 				</div>
 			</div>

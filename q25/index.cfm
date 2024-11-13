@@ -21,8 +21,8 @@
 
 				<div class="text-primary-emphasis mt-3">
 					<cfif StructKeyExists(form, "submit")>
-						<cfset objCountWords = CreateObject('component', 'components.tagCloud')>
-						<cfset local.structWordCount = objCountWords.countWords(form.paraInput)>
+						<cfset local.objCountWords = CreateObject('component', 'components.tagCloud')>
+						<cfset local.structWordCount = local.objCountWords.countWords(form.paraInput)>
 						<cfdump var = "#local.structWordCount#">
 
 						<cfloop collection="#local.structWordCount#" item="word">

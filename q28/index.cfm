@@ -29,7 +29,7 @@
                         </ul>
 					</cfif>
                     <cfif StructKeyExists(session, "userRole")>
-                        <a class="btn btn-primary" id="logoutBtn" name="logoutBtn" href="components/logOut.cfc?method=logOut">Log In</a>
+                        <a class="btn btn-danger" id="logoutBtn" name="logoutBtn" href="components/logOut.cfc?method=logOut">Log In</a>
                     <cfelse>
 					    <a class="btn btn-primary" id="loginBtn" name="loginBtn" href="login.cfm">Log In</a>
                     </cfif>

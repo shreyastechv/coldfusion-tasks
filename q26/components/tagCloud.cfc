@@ -7,17 +7,17 @@
         <cfset local.wordCount = StructNew("ordered")>
 
         <cfloop list="#local.formattedParagraph#" delimiters=" " item="word">
+            <cfif IsNumeric(word)>
+                <cfcontinue>
+            </cfif>
+
             <cfquery name="wordCheck" datasource="test_sql_server">
-                SELECT COUNT(*) AS numberOfRows FROM tags WHERE word=(<cfqueryparam value="#word#" cfsqltype="cf_sql_varchar">);
+                SELECT COUNT(word) AS numberOfRows FROM tags WHERE word=(<cfqueryparam value="#word#" cfsqltype="cf_sql_varchar">);
             </cfquery>
             <cfif wordCheck.numberOfRows IS 0>
                 <cfquery name="wordAdd" datasource="test_sql_server">
                     INSERT INTO tags (word) VALUES (<cfqueryparam value="#word#" cfsqltype="cf_sql_varchar">);
                 </cfquery>
-            </cfif>
-
-            <cfif IsNumeric(word)>
-                <cfcontinue>
             </cfif>
 
             <cfif Len(word) GTE 3>

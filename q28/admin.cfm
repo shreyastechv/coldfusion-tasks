@@ -39,7 +39,7 @@
 							<cflocation url="index.cfm" addToken="no">
 						</cfif>
 					</cfif>
-					<a class="btn btn-primary" id="logoutBtn" name="logoutBtn" href="components/logOut.cfc?method=logOut">Log Out</a>
+					<a class="btn btn-danger" id="logoutBtn" name="logoutBtn" href="components/logOut.cfc?method=logOut">Log Out</a>
 					<div id="overlayForm" class="overlayForm">
 						<form name="addPageForm" id="addPageForm" method="post">
 							<label class="form-label text-white" for="pageNameInput">Enter page name:</label>

@@ -8,13 +8,13 @@
         </cfquery>
 
         <cfif getPassword.password IS "">
-            <cfreturn "nouser">
+            <cfreturn "There is no user with username #arguments.username#.">
         <cfelse>
             <cfif getPassword.password IS arguments.password>
                 <cfset session.loggedIn = true>
-                <cfreturn "good">
+                <cflocation url="./welcome.cfm" addToken="no">
             <cfelse>
-                <cfreturn "badpass">
+                <cfreturn "Wrong password for the user with username #form.username#">
             </cfif>
         </cfif>
     </cffunction>

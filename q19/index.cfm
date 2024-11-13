@@ -9,21 +9,18 @@
 
     <body>
 		<cfoutput>
+			<cfparam name="cookie.visitsCounter" default=0>
 			<div class="container mt-5">
 				<form class="d-flex flex-column gap-2" name="testform" method="post">
 					<input class="btn bg-success w-25" type="submit" name="submit">
 				</form>
 				<div class="text-primary-emphasis mt-3">
-					<cfif NOT StructKeyExists(Cookie, "VisitsCounter")>
-						<cfcookie name="VisitsCounter" value=0>
+					<cfif StructKeyExists(form, "submit")>
+						<cfset local.objCookie = createObject('component', 'components.cookieCount')>
+						<cfset local.cookieCount = local.objCookie.getCookieCount()>
+						<cflocation url="index.cfm" addToken="no">
 					</cfif>
-
-					<cfif StructKeyExists(Form, "submit")>
-						<cfset Cookie.VisitsCounter += 1>
-						<cflocation url="index.cfm" addToken="false">
-					</cfif>
-
-					Visits Count: #Cookie.VisitsCounter#
+					Visits Count: #cookie.visitsCounter#
 				</div>
 			</div>
 		</cfoutput>

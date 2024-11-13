@@ -13,14 +13,14 @@
 				<div class="text-primary-emphasis mt-3">
 					<cfset local.objMultiply = createObject('component', 'components.functions')>
 
-					<cfset res = local.objMultiply.multiply(1,2)>
-					1x2 = #res#
+					<cfset local.result1 = local.objMultiply.multiply(1,2)>
+					1x2 = #local.result1#
 					<br>
-					<cfset res = local.objMultiply.multiply(1,2,3)>
-					1x2x3 = #res#
+					<cfset local.result2 = local.objMultiply.multiply(1,2,3)>
+					1x2x3 = #local.result2#
 					<br>
-					<cfset res = local.objMultiply.multiply(1,2,3,4)>
-					1x2x3x4 = #res#
+					<cfset local.result3 = local.objMultiply.multiply(1,2,3,4)>
+					1x2x3x4 = #local.result3#
 				</div>
 			</div>
 		</cfoutput>

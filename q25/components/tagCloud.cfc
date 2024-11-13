@@ -7,8 +7,12 @@
         <cfset local.wordCount = StructNew("ordered")>
 
         <cfloop list="#local.formattedParagraph#" delimiters=" " item="word">
+            <cfif IsNumeric(word)>
+                <cfcontinue>
+            </cfif>
+
             <cfquery name="wordCheck" datasource="test_sql_server">
-                SELECT COUNT(*) AS numberOfRows FROM tags WHERE word=(<cfqueryparam value="#word#" cfsqltype="cf_sql_varchar">);
+                SELECT COUNT(word) AS numberOfRows FROM tags WHERE word=(<cfqueryparam value="#word#" cfsqltype="cf_sql_varchar">);
             </cfquery>
             <cfif wordCheck.numberOfRows IS 0>
                 <cfquery name="wordAdd" datasource="test_sql_server">
@@ -16,24 +20,22 @@
                 </cfquery>
             </cfif>
 
-            <cfif IsNumeric(word)>
+            <cfif Len(word) LT 3>
                 <cfcontinue>
             </cfif>
 
-            <cfif Len(word) GTE 3>
-                <cfif StructKeyExists(wordCount, "#word#")>
-                    <cfset wordCount[word] += 1>
-                <cfelse>
-                    <cfset wordCount[word] = 1>
-                </cfif>
+            <cfif StructKeyExists(local.wordCount, "#word#")>
+                <cfset local.wordCount[word] += 1>
+            <cfelse>
+                <cfset local.wordCount[word] = 1>
             </cfif>
         </cfloop>
 
-        <cfset sortedKeys = StructSort(wordCount, "numeric", "desc")>
-        <cfset sortedWordCount = StructNew("ordered")>
-        <cfloop array="#sortedKeys#" item="key">
-            <cfset sortedWordCount[key] = wordCount[key]>
+        <cfset local.sortedKeys = StructSort(local.wordCount, "numeric", "desc")>
+        <cfset local.sortedWordCount = StructNew("ordered")>
+        <cfloop array="#local.sortedKeys#" item="key">
+            <cfset local.sortedWordCount[key] = local.wordCount[key]>
         </cfloop>
-        <cfreturn sortedWordCount>
+        <cfreturn local.sortedWordCount>
     </cffunction>
 </cfcomponent>

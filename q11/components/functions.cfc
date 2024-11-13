@@ -1,9 +1,9 @@
 <cfcomponent>
     <cffunction name="multiply" returnType="string" access="public">
-        <cfset product = 1>
+        <cfset local.product = 1>
         <cfloop array="#arguments#" item="num">
-            <cfset product = product * num>
+            <cfset local.product = local.product * num>
         </cfloop>
-        <cfreturn product>
+        <cfreturn local.product>
     </cffunction>
 </cfcomponent>

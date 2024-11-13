@@ -32,7 +32,7 @@
 					</cfloop>
 					<cfif StructKeyExists(form, "submit")>
 						<br>
-						#Form.queryNum# th row first name is #local.result.nthName#
+						#form.queryNum# th row first name is #local.result.nthName#
 					</cfif>
 				</div>
 			</div>

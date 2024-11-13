@@ -22,13 +22,12 @@
 					<cfset session.structResult = structNew()>
 				</cfif>
 				<cfif IsDefined("form.submit")>
-					<cfset obj = createObject('component', 'components.comp')>
-					<cfset result = obj.makeStruct(form.text1, form.text2)>
-					<cfset StructAppend(session.structResult, result)>
-					<cfdump var="#session.structResult#">
+					<cfset local.objStruct = createObject('component', 'components.comp')>
+					<cfset local.newStruct = objStruct.makeStruct(form.text1, form.text2)>
+					<cfset StructAppend(session.structResult, local.newStruct)>
+					<cfdump var = "#session.structResult#">
 				</cfif>
-				<cfset StructClear(Form)>
-
+				<cfset StructClear(form)>
 			</div>
 		</div>
 		<script src="../js/bootstrap.bundle.min.js"></script>

@@ -23,7 +23,7 @@
 						<textarea class="form-control mb-3" id="bdayMessage" name="bdayMessage" placeholder="Enter message here" rows="5" required></textarea>
 
 						<label class="form-label" for="greetingsImage">Select a greeting image:</label>
-						<input class="form-control mb-3" type="file" id="greetingsImage" name="greetingsImage" required>
+						<input class="form-control mb-3" type="file" id="greetingsImage" accept="image/*" name="greetingsImage" required>
 
 						<input class="btn btn-primary" type="submit" id="submit" name="submit">
 					</div>
@@ -33,7 +33,7 @@
 					<cfif structKeyExists(form,"submit")>
 						<cfset local.objformSubmit = createObject('component', 'components.comp')>
 						<cfset local.objformSubmit.sendEmail(form.name, form.email, form.bdayMessage, form.greetingsImage)>
-						<cflocation url="index.cfm" addToken="false">
+						<div class="text-success">Mail sent successfully</div>
 					</cfif>
 				</div>
 			</div>

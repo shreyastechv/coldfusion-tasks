@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coldfusion Task</title>
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<script src="../js/jquery-3.7.1.min.js"></script>
 		<script src="../js/fontawesome.js"></script>
 	</head>
 
@@ -29,7 +30,7 @@
                         </ul>
 					</cfif>
                     <cfif StructKeyExists(session, "userRole")>
-                        <a class="btn btn-danger" id="logoutBtn" name="logoutBtn" href="components/logOut.cfc?method=logOut">Log In</a>
+                        <button type="button" class="btn btn-danger" id="logoutBtn" name="logoutBtn" onclick="logOut()">Log Out</button>
                     <cfelse>
 					    <a class="btn btn-primary" id="loginBtn" name="loginBtn" href="login.cfm">Log In</a>
                     </cfif>
@@ -37,5 +38,6 @@
 			</div>
 		</cfoutput>
 		<script src="../js/bootstrap.bundle.min.js"></script>
+        <script src="./js/script.js"></script>
     </body>
 </html>

@@ -14,12 +14,16 @@
 					<cflocation url="index.cfm" addToken="no">
 				</cfif>
 
-				<form name="captchaForm" method="post">
+				<form name="loginForm" method="post">
 					<label class="form-label" for="username">Enter username:</label>
 					<input class="form-control mb-3" type="text" id="username" name="username" placeholder="Example: user101" required>
 					<label class="form-label" for="password">Enter password:</label>
 					<input class="form-control mb-3" type="password" id="password" name="password" placeholder="Enter the super secure password" required>
-					<input class="btn btn-primary" type="submit" id="submit" name="submit">
+					<div class="d-flex align-items-center gap-2">
+						<input class="btn btn-primary" type="submit" id="submit" name="submit" value="Login">
+						<span>Don't have an account?</span>
+						<a class="text-decoration-none" href="signup.cfm">Sign Up</a>
+					</div>
 				</form>
 
 				<div class="text-primary-emphasis mt-3">

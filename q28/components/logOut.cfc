@@ -1,8 +1,10 @@
 <cfcomponent>
-    <cffunction name="logOut" returnType="void" access="remote">
+    <cffunction name="logOut" returnType="boolean" returnFormat="json" access="remote">
         <cfif StructKeyExists(session, "userRole")>
             <cfset StructDelete(session, "userRole")>
+            <cfreturn true>
+        <cfelse>
+            <cfreturn false>
         </cfif>
-        <cflocation url="../index.cfm" addToken="no">
     </cffunction>
 </cfcomponent>

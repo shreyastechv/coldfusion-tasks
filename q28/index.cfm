@@ -13,7 +13,7 @@
 		<cfoutput>
 			<div class="container mt-5">
 				<div class="text-primary-emphasis mt-3">
-					<cfif StructKeyExists(session, "userRole") AND (session.userRole IS "admin" OR session.userRole IS "editor")>
+					<cfif session.userRole IS "admin" OR session.userRole IS "editor">
                         <cflocation url="admin.cfm" addToken="no">
 					<cfelse>
                         <cfset objComponent = CreateObject('component', 'components.getPages')>

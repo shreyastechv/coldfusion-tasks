@@ -3,8 +3,8 @@ function logOut() {
         $.ajax({
             type: "POST",
             url: "./components/logOut.cfc?method=logOut",
-            success: function(result){
-                location.reload(result);
+            success: function(){
+                location.reload();
             }
         });
     }

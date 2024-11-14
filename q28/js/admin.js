@@ -31,12 +31,12 @@ function OverlayToggle() {
     }
 }
 
-document.getElementById("addPageForm").addEventListener('submit', function (event) {
+document.getElementById("addPageForm").addEventListener('submit', function () {
     const pageName = document.getElementById("pageNameInput").value;
     const pageDesc = document.getElementById("pageDescInput").value;
     const pageId = document.getElementById("pageIdInput").value;
     let ajaxData = {pageName: pageName, pageDesc: pageDesc};
-    let url = "";
+    let ajaxUrl = "";
     if (pageId != "") {
         ajaxData.pageId = parseInt(pageId);
         ajaxUrl = "components/modifyPage.cfc?method=editPage";
@@ -44,14 +44,13 @@ document.getElementById("addPageForm").addEventListener('submit', function (even
     else {
         ajaxUrl = "components/modifyPage.cfc?method=addPage";
     }
-    event.preventDefault();
     $.ajax({
         type: "POST",
         url: ajaxUrl,
         dataType: "json",
         data: ajaxData,
-        success: function(result){
-            location.reload(result);
+        success: function(){
+            location.reload();
         }
     });
 });
@@ -75,8 +74,8 @@ function logOut() {
         $.ajax({
             type: "POST",
             url: "./components/logOut.cfc?method=logOut",
-            success: function(result){
-                location.reload(result);
+            success: function(){
+                location.reload();
             }
         });
     }

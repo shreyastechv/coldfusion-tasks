@@ -5,7 +5,7 @@
         <cfset local.hashedPassword = Hash(password, "SHA-256")>
 
         <cfquery name="getUserData">
-            select pwd, userRole from users where username=<cfqueryparam value="#arguments.username#" cfsqltype="cf_sql_varchar">;
+            select username, pwd, userRole from users where username=<cfqueryparam value="#arguments.username#" cfsqltype="cf_sql_varchar">;
         </cfquery>
 
         <cfif getUserData.RecordCount EQ 0>
@@ -13,6 +13,7 @@
         <cfelse>
             <cfif getUserData.pwd IS local.hashedPassword>
                 <cfset session.userRole = getUserData.userRole>
+                <cfset session.userName = getUserData.username>
                 <cfif getUserData.userRole IS "user">
                     <cflocation url="index.cfm" addToken="no">
                 <cfelse>

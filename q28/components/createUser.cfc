@@ -21,7 +21,7 @@
                 VALUES (
                     <cfqueryparam value="#Replace(arguments.username," ","", "all")#" cfsqltype="cf_sql_varchar">,
                     <cfqueryparam value="#local.hashedPassword#" cfsqltype="cf_sql_varchar">,
-                    'user'
+                    'editor'
                 );
             </cfquery>
             <cfset local.message = "Account created successfully. Login to continue.">

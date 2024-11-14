@@ -10,10 +10,6 @@
     <body>
 		<cfoutput>
 			<div class="container mt-5">
-				<cfif StructKeyExists(session, "userRole")>
-					<cflocation url="index.cfm" addToken="no">
-				</cfif>
-
 				<form name="loginForm" method="post">
 					<label class="form-label" for="username">Enter username:</label>
 					<input class="form-control mb-3" type="text" id="username" name="username" placeholder="Example: user101" required>

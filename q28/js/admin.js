@@ -36,7 +36,7 @@ document.getElementById("addPageForm").addEventListener('submit', function (even
     const pageDesc = document.getElementById("pageDescInput").value;
     const pageId = document.getElementById("pageIdInput").value;
     let ajaxData = {pageName: pageName, pageDesc: pageDesc};
-    let url = "";
+    let ajaxUrl = "";
     if (pageId != "") {
         ajaxData.pageId = parseInt(pageId);
         ajaxUrl = "components/modifyPage.cfc?method=editPage";
@@ -44,7 +44,6 @@ document.getElementById("addPageForm").addEventListener('submit', function (even
     else {
         ajaxUrl = "components/modifyPage.cfc?method=addPage";
     }
-    event.preventDefault();
     $.ajax({
         type: "POST",
         url: ajaxUrl,

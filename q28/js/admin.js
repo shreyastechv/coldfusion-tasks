@@ -31,7 +31,7 @@ function OverlayToggle() {
     }
 }
 
-document.getElementById("addPageForm").addEventListener('submit', function (event) {
+document.getElementById("addPageForm").addEventListener('submit', function () {
     const pageName = document.getElementById("pageNameInput").value;
     const pageDesc = document.getElementById("pageDescInput").value;
     const pageId = document.getElementById("pageIdInput").value;
@@ -49,8 +49,8 @@ document.getElementById("addPageForm").addEventListener('submit', function (even
         url: ajaxUrl,
         dataType: "json",
         data: ajaxData,
-        success: function(result){
-            location.reload(result);
+        success: function(){
+            location.reload();
         }
     });
 });
@@ -74,8 +74,8 @@ function logOut() {
         $.ajax({
             type: "POST",
             url: "./components/logOut.cfc?method=logOut",
-            success: function(result){
-                location.reload(result);
+            success: function(){
+                location.reload();
             }
         });
     }

@@ -14,4 +14,5 @@
         </cfif>
         <cfreturn getPagesQuery>
     </cffunction>
+
 </cfcomponent>

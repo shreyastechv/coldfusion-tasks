@@ -40,6 +40,8 @@
 						<cfset local.objUserCreation = CreateObject('component', 'components.createUser')>
 						<cfset local.result = local.objUserCreation.createUser(form.username, form.roleChoice, form.password, form.confirmPassword)>
 						#local.result#
+					<!---<cfelse>
+						<cflocation url="admin.cfm" addToken="no">--->
 					</cfif>
 				</div>
 			</div>

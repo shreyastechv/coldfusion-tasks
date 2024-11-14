@@ -12,7 +12,9 @@
         </cfif>
 
         <cfquery name="checkUser">
-            SELECT username FROM users WHERE username=<cfqueryparam value="#arguments.username#" cfsqltype="cf_sql_varchar">;
+            SELECT username
+            FROM users
+            WHERE username=<cfqueryparam value="#arguments.username#" cfsqltype="cf_sql_varchar">;
         </cfquery>
 
         <cfif checkUser.RecordCount EQ 0>

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coldfusion Task</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -28,62 +28,7 @@
 				</div>
 			</div>
 		</cfoutput>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-		<script>
-			const subscribeForm = document.getElementById("subscribeForm");
-			const userFirstNameInput = document.getElementById("userFirstName");
-			const userEmailInput = document.getElementById("userEmail");
-			const submitBtn = document.getElementById("submit");
-			const statusSection = document.getElementById("status");
-
-			subscribeForm.addEventListener('submit', function (event) { event.preventDefault(); });
-			userEmailInput.addEventListener('change', function () {
-				submitBtn.disabled = true;
-			});
-
-			function validateEmail() {
-				if (userEmailInput.value == "") {
-					statusSection.style.color = "red";
-					statusSection.textContent = "INPUT IS EMPTY!";
-					return;
-				}
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						if (this.responseText === "true") {
-							submitBtn.disabled = true;
-							statusSection.style.color = "red";
-							statusSection.textContent = "Email already exists in the database.";
-						}
-						else {
-							submitBtn.disabled = false;
-							statusSection.style.color = "cyan";
-							statusSection.textContent = "Email not subscribed. Click the button to join mailing list.";
-						}
-					}
-				};
-				xhttp.open("GET", "comp.cfc?method=isEmailPresent&userEmail="+userEmailInput.value, true);
-				xhttp.send();
-			}
-
-			function subscribe() {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						submitBtn.disabled = true;
-						statusSection.style.color = "green";
-						statusSection.textContent = "Email subscribed.";
-						userEmailInput.value = "";
-						userFirstNameInput.value = "";
-					}
-					else {
-						statusSection.style.color = "red";
-						statusSection.textContent = "Unable to subscribe.";
-					}
-				};
-				xhttp.open("GET", "comp.cfc?method=addUserData&userEmail="+userEmailInput.value+"&userFirstName="+userFirstNameInput.value, true);
-				xhttp.send();
-			}
-		</script>
+		<script src="../js/bootstrap.bundle.min.js"></script>
+		<script src="./js/script.js"></script>
 	</body>
 </html>

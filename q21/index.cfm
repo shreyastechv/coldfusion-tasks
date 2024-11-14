@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coldfusion Task</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -23,7 +23,7 @@
 						<textarea class="form-control mb-3" id="bdayMessage" name="bdayMessage" placeholder="Enter message here" rows="5" required></textarea>
 
 						<label class="form-label" for="greetingsImage">Select a greeting image:</label>
-						<input class="form-control mb-3" type="file" id="greetingsImage" name="greetingsImage" required>
+						<input class="form-control mb-3" type="file" id="greetingsImage" accept="image/*" name="greetingsImage" required>
 
 						<input class="btn btn-primary" type="submit" id="submit" name="submit">
 					</div>
@@ -31,13 +31,13 @@
 
 				<div class="text-primary-emphasis mt-3">
 					<cfif structKeyExists(form,"submit")>
-						<cfset local.objformSubmit = createObject('component', 'comp')>
+						<cfset local.objformSubmit = createObject('component', 'components.comp')>
 						<cfset local.objformSubmit.sendEmail(form.name, form.email, form.bdayMessage, form.greetingsImage)>
-						<cflocation url="index.cfm" addToken="false">
+						<div class="text-success">Mail sent successfully</div>
 					</cfif>
 				</div>
 			</div>
 		</cfoutput>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		<script src="../js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

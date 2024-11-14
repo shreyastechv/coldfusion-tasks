@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Coldfusion Task</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="css/styles.css" rel="stylesheet">
     </head>
 
@@ -81,83 +81,9 @@
                         <div class="text-danger text-center fs-5 mt-2">Error uploading data</div>
                     </cfif>
                 </cfif>
-                <script>
-                    document.getElementById("applicationForm").addEventListener('submit', function (event) {
-
-                        // User input
-                        const jobRole = document.getElementById("jobRole").value;
-                        const relocateChoice = document.querySelector('input[name="relocateChoice"]:checked').value;
-                        const startDate = document.getElementById("startDate").value;
-                        const firstName = document.getElementById("firstName").value;
-                        const lastName = document.getElementById("lastName").value;
-                        const mail = document.getElementById("mail").value;
-                        const phone1 = document.getElementById("phone1").value;
-                        const phone2 = document.getElementById("phone2").value;
-                        const phone3 = document.getElementById("phone3").value;
-
-                        // Error boxes
-                        let jobRoleError = document.getElementById("jobRoleError");
-                        let dateError = document.getElementById("dateError");
-                        let fullNameError = document.getElementById("fullNameError");
-                        let mailError = document.getElementById("mailError");
-                        let phoneError = document.getElementById("phoneError");
-
-                        if (jobRole == "") {
-                            jobRoleError.textContent = "This field is required. Please enter a value.";
-                            event.preventDefault();
-                        }
-                        else {
-                            jobRoleError.textContent = "";
-                        }
-
-                        if (startDate == "") {
-                            dateError.textContent = "This field is required. Please enter a value.";
-                            event.preventDefault();
-                        }
-                        else {
-                            dateError.textContent = "";
-                        }
-
-                        if (firstName == "" || lastName == "") {
-                            fullNameError.textContent = "This field is required. Please enter a value.";
-                            event.preventDefault();
-                        }
-                        else {
-                            fullNameError.textContent = "";
-                        }
-
-                        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (mail == "") {
-                            mailError.textContent = "This field is required. Please enter a value.";
-                            event.preventDefault();
-                        }
-                        else if (!emailPattern.test(mail)) {
-                            mailError.textContent = "Please enter a valid email address.";
-                            event.preventDefault();
-                        }
-                        else {
-                            mailError.textContent = "";
-                        }
-
-                        if (phone1 == "" || phone2 == "" || phone3 == "") {
-                            phoneError.textContent = "This field is required. Please enter a value.";
-                            event.preventDefault();
-                        }
-                        else if (isNaN(phone1) || isNaN(phone2) || isNaN(phone3)) {
-                            phoneError.textContent = "Only numbers are allowed.";
-                            event.preventDefault();
-                        }
-                        else if (phone1.length != 3 || phone2.length != 3 || phone3.length != 4) {
-                            phoneError.textContent = "Please enter a valid phone number.";
-                            event.preventDefault();
-                        }
-                        else {
-                            phoneError.textContent = "";
-                        }
-                    });
-                </script>
             </div>
         </cfoutput>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		<script src="../js/bootstrap.bundle.min.js"></script>
+        <script src="./js/script.js"></script>
     </body>
 </html>

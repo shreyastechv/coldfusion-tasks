@@ -3,7 +3,7 @@
         <cfset local.chars="ABCDEFGHIJKLMNOPQRST0123456789">
         <cfset local.randomString = "">
         <cfloop index="i" from="0" to="5">
-            <cfset randomString &= Mid(chars, RandRange(1, len(chars)), 1)>
+            <cfset local.randomString &= Mid(chars, RandRange(1, len(chars)), 1)>
         </cfloop>
         <cfreturn local.randomString>
     </cffunction>

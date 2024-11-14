@@ -1,6 +1,7 @@
 <cfcomponent>
     <cffunction name="createUser" returnType="string" access="public">
         <cfargument required="true" type="string" name="username">
+        <cfargument required="true" type="integer" name="roleChoice">
         <cfargument required="true" type="string" name="password">
         <cfargument required="true" type="string" name="confirmPassword">
         <cfset local.hashedPassword = Hash(password, "SHA-256")>
@@ -17,11 +18,11 @@
         <cfif checkUser.RecordCount EQ 0>
             <cfquery name="addUser">
                 INSERT INTO users
-                (userName, pwd, userRole)
+                (userName, pwd, roleId)
                 VALUES (
                     <cfqueryparam value="#Replace(arguments.username," ","", "all")#" cfsqltype="cf_sql_varchar">,
                     <cfqueryparam value="#local.hashedPassword#" cfsqltype="cf_sql_varchar">,
-                    'editor'
+                    <cfqueryparam value="#arguments.roleChoice#" cfsqltype="cf_sql_varchar">
                 );
             </cfquery>
             <cfset local.message = "Account created successfully. Login to continue.">

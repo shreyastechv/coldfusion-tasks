@@ -13,22 +13,18 @@
 		<cfoutput>
 			<div class="container mt-5">
 				<div class="text-primary-emphasis mt-3">
-					<cfif session.userRole IS "admin" OR session.userRole IS "editor">
-                        <cflocation url="admin.cfm" addToken="no">
-					<cfelse>
-                        <cfset objComponent = CreateObject('component', 'components.getPages')>
-                        <cfset queryPages = objComponent.getPages()>
-                        <ul>
-                            <cfloop query="queryPages">
-                                <li class="mb-2">
-                                    <div class="d-flex align-items-center gap-4">
-                                        <button type="button" class="btn btn-info" data-bs-toggle="collapse" data-bs-target="###pageid#">#pagename#</button>
-                                    </div>
-                                    <div id="#pageid#" class="collapse">#pagedescs#</div>
-                                </li>
-                            </cfloop>
-                        </ul>
-					</cfif>
+                    <cfset objComponent = CreateObject('component', 'components.getPages')>
+                    <cfset queryPages = objComponent.getPages()>
+                    <ul>
+                        <cfloop query="queryPages">
+                            <li class="mb-2">
+                                <div class="d-flex align-items-center gap-4">
+                                    <button type="button" class="btn btn-info" data-bs-toggle="collapse" data-bs-target="###pageid#">#pagename#</button>
+                                </div>
+                                <div id="#pageid#" class="collapse">#pagedescs#</div>
+                            </li>
+                        </cfloop>
+                    </ul>
                     <cfif StructKeyExists(session, "userRole")>
                         <button type="button" class="btn btn-danger" id="logoutBtn" name="logoutBtn" onclick="logOut()">Log Out</button>
                     <cfelse>

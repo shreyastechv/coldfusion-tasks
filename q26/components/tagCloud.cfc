@@ -36,4 +36,11 @@
         </cfloop>
         <cfreturn local.sortedWordCount>
     </cffunction>
+
+    <cffunction name="selectColor" returnType="string" access="public">
+        <cfargument name="justANumber" type="string" required="true">
+
+        <cfset local.hue = arguments.justANumber * 137.508>
+        <cfreturn "hsl(#hue#,50%,75%)">
+    </cffunction>
 </cfcomponent>

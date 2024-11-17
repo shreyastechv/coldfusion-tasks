@@ -18,7 +18,8 @@
 					<cfdump var = "#local.structWordCount#">
 
 					<cfloop collection="#local.structWordCount#" item="word">
-						<p style="font-size: #local.structWordCount[word]#em;">#word#</p>
+						<cfset local.count = local.structWordCount[word]>
+						<p style="font-size: #local.count#em; color: #local.objCountWords.selectColor(local.count)#;">#word#</p>
 					</cfloop>
 				</div>
 			</div>

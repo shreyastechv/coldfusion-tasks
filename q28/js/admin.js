@@ -5,13 +5,10 @@ function deletePage(pageid, pagename) {
             url: "components/deletePage.cfc?method=deletePage",
             dataType: "json",
             data: {pageid: pageid},
-            success: function(data) {
-                if (!data) {
-                    alert("Unable to delete the page due to lower privileges!");
-                }
+            success: function() {
+                location.reload();
             }
         });
-        location.reload();
     }
 }
 

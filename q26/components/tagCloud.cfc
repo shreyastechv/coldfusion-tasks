@@ -29,11 +29,26 @@
             </cfif>
         </cfloop>
 
-        <cfset local.sortedKeys = StructSort(local.wordCount, "numeric", "desc")>
-        <cfset local.sortedWordCount = StructNew("ordered")>
-        <cfloop array="#local.sortedKeys#" item="key">
-            <cfset local.sortedWordCount[key] = local.wordCount[key]>
-        </cfloop>
+        <!--- Sort struct --->
+        <cfset local.sortedWordCount = StructToSorted(local.wordCount, function(value1, value2, key1, key2) {
+            if (value1 != value2) {
+                return value2 - value1;
+            }
+            else if (len(key1) != len(key2)) {
+                return len(key2) - len(key1);
+            }
+            else {
+                return compare(key2, key1);
+            }
+        })>
+
         <cfreturn local.sortedWordCount>
+    </cffunction>
+
+    <cffunction name="selectColor" returnType="string" access="public">
+        <cfargument name="justANumber" type="string" required="true">
+
+        <cfset local.hue = arguments.justANumber * 137.508>
+        <cfreturn "hsl(#hue#,50%,75%)">
     </cffunction>
 </cfcomponent>

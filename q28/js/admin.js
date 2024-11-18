@@ -32,6 +32,8 @@ document.getElementById("addPageForm").addEventListener('submit', function () {
     const pageName = document.getElementById("pageNameInput").value;
     const pageDesc = document.getElementById("pageDescInput").value;
     const pageId = document.getElementById("pageIdInput").value;
+    const addPageFormError = document.getElementById("addPageFormError");
+
     let ajaxData = {pageName: pageName, pageDesc: pageDesc};
     let ajaxUrl = "";
     if (pageId != "") {
@@ -46,8 +48,14 @@ document.getElementById("addPageForm").addEventListener('submit', function () {
         url: ajaxUrl,
         dataType: "json",
         data: ajaxData,
-        success: function(){
-            location.reload();
+        success: function(response){
+		if (response) {
+			addPageFormError.textContent = "";
+			location.reload();
+		}
+		else {
+			addPageFormError.textContent = "Page with same name exists";
+		}
         }
     });
 });

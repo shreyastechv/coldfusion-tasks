@@ -38,7 +38,7 @@
 							<textarea class="form-control mb-3" id="pageDescInput" name="pageDescInput" maxlength="500" rows="7" required></textarea>
 							<input type="hidden" id="pageIdInput" name="pageIdInput" value="">
 							<input class="btn btn-primary" type="submit" id="submit" name="submit">
-							<div id="addPageFormError" class="text-error"></div>
+							<div id="addPageFormError" class="text-danger mt-2"></div>
 						</form>
 					</div>
 				</div>

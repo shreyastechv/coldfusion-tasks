@@ -15,7 +15,9 @@ function deletePage(pageid, pagename) {
 function OverlayToggle() {
     const overlayForm = document.getElementById("overlayForm");
     const addPageBtn = document.getElementById("addPageBtn");
+    const addPageFormError = document.getElementById("addPageFormError");
 
+    addPageFormError.textContent = "";
     if (overlayForm.style.display == "block") {
         overlayForm.style.display = "none";
         addPageBtn.style.backgroundColor = "white";
@@ -28,10 +30,11 @@ function OverlayToggle() {
     }
 }
 
-document.getElementById("addPageForm").addEventListener('submit', function () {
+document.getElementById("addPageForm").addEventListener('submit', function (event) {
     const pageName = document.getElementById("pageNameInput").value;
     const pageDesc = document.getElementById("pageDescInput").value;
     const pageId = document.getElementById("pageIdInput").value;
+    const addPageFormError = document.getElementById("addPageFormError");
     let ajaxData = {pageName: pageName, pageDesc: pageDesc};
     let ajaxUrl = "";
     if (pageId != "") {
@@ -41,13 +44,21 @@ document.getElementById("addPageForm").addEventListener('submit', function () {
     else {
         ajaxUrl = "components/modifyPage.cfc?method=addPage";
     }
+
+    event.preventDefault();
     $.ajax({
         type: "POST",
         url: ajaxUrl,
         dataType: "json",
         data: ajaxData,
-        success: function(){
-            location.reload();
+        success: function(response){
+		if (response) {
+			addPageFormError.textContent = "";
+			location.reload();
+		}
+		else {
+			addPageFormError.textContent = "Page with same name exists";
+		}
         }
     });
 });
